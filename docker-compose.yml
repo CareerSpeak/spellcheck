@@ -1,0 +1,16 @@
+version: "3.2"
+
+services:
+  grammar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grammar
+    expose:
+      - 65535:65535
+    networks:
+      - careerspeak
+
+networks:
+  careerspeak:
+    external: true
