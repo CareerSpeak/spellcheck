@@ -1,9 +1,9 @@
-import PyPDF2
+import pypdf
 
 
 class PdfParser:
     def __init__(self, path: str) -> None:
-        self.pdfFile = PyPDF2.PdfReader(path)
+        self.pdfFile = pypdf.PdfReader(path)
 
     def parse(self) -> str:
         pdfText = ''
