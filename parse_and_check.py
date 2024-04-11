@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def check():
-    args = request.args
-    text = PdfParser(args.get('file') or '').parse()
+    args = request.argsN
+    text = '/resume/'+PdfParser(args.get('file') or '').parse()
     grammar = GrammarChecker().check(text)
     return jsonify(
         {

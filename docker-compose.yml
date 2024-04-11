@@ -8,6 +8,8 @@ services:
       - 65535:65535
     networks:
       - careerspeak
+    volumes:
+      - ${PWD}../resume:/resume:ro
 
 networks:
   careerspeak:
