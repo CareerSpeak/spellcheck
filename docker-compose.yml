@@ -9,7 +9,7 @@ services:
     networks:
       - careerspeak
     volumes:
-      - ${PWD}../resume:/resume:ro
+      - ../resume:/resume:ro
 
 networks:
   careerspeak:
