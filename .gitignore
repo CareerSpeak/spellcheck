@@ -1,3 +1,6 @@
+# languagetool download cache
+cache/
+
 # Data folder for resumes
 data/
 

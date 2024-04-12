@@ -10,6 +10,7 @@ services:
       - careerspeak
     volumes:
       - ../resume:/resume:ro
+      - ./cache:/root/.cache/language_tool_python:rw
 
 networks:
   careerspeak:
