@@ -19,9 +19,10 @@ def check():
                 'errorLength': match.errorLength,
                 'sentence': match.sentence}
                for match in matches]
-    
-    terminal = (subprocess.check_output(matches, shell=True, encoding='utf-8')).strip()
-    # terminal = matches.stdout(encoding='utf-8')
+
+    terminal = (subprocess.check_output(f'python -u ./using_language_tool.py \
+                                        /resume/{args.get("file")}',
+                                        shell=True, encoding='utf-8')).strip()
     print(terminal)
 
     return jsonify(

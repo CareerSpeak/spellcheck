@@ -1,4 +1,7 @@
 import language_tool_python
+import argparse
+
+from pdf_parser import PdfParser
 
 
 class GrammarChecker:
@@ -31,3 +34,17 @@ class GrammarChecker:
             for error in errors:
                 output.append(error)
         return output
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file')
+    args = parser.parse_args()
+    text = PdfParser(args.file).parse()
+
+    matches = language_tool_python.LanguageTool('en-US').check(text)
+    for match in matches:
+        print(match)
+
+    # grammar = GrammarChecker().check(text)
+    # print(grammar)
