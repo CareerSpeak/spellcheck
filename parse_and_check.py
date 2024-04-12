@@ -10,7 +10,15 @@ app = Flask(__name__)
 def check():
     args = request.args
     text = PdfParser('/resume/'+args.get('file') or '').parse()
-    grammar = GrammarChecker().check(text)
+    matches = GrammarChecker().check(text)
+    grammar = [{'ruleID': match.ruleId,
+                'message': match.message,
+                'replacements': match.replacements,
+                'offset': match.offset,
+                'errorLength': match.errorLength,
+                'sentence': match.sentence}
+               for match in matches]
+    print(grammar)
     return jsonify(
         {
             'grammar': f'{grammar}',
