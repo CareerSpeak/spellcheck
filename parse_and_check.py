@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 
 from pdf_parser import PdfParser
 from using_language_tool import GrammarChecker
+import subprocess
 
 app = Flask(__name__)
 
@@ -18,11 +19,16 @@ def check():
                 'errorLength': match.errorLength,
                 'sentence': match.sentence}
                for match in matches]
-    print(grammar)
+    
+    terminal = (subprocess.check_output(matches, shell=True, encoding='utf-8')).strip()
+    # terminal = matches.stdout(encoding='utf-8')
+    print(terminal)
+
     return jsonify(
         {
             'grammar': f'{grammar}',
-            'text': f'{text}'
+            'text': f'{text}',
+            'terminal': f'{terminal}'
         })
 
 
