@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 
-from pdf_parser import PdfParser
-from using_language_tool import GrammarChecker
+# from pdf_parser import PdfParser
+# from using_language_tool import GrammarChecker
 import subprocess
 
 app = Flask(__name__)
@@ -10,15 +10,15 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def check():
     args = request.args
-    text = PdfParser('/resume/'+args.get('file') or '').parse()
-    matches = GrammarChecker().check(text)
-    grammar = [{'ruleID': match.ruleId,
-                'message': match.message,
-                'replacements': match.replacements,
-                'offset': match.offset,
-                'errorLength': match.errorLength,
-                'sentence': match.sentence}
-               for match in matches]
+    # text = PdfParser('/resume/'+args.get('file') or '').parse()
+    # matches = GrammarChecker().check(text)
+    # grammar = [{'ruleID': match.ruleId,
+    #             'message': match.message,
+    #             'replacements': match.replacements,
+    #             'offset': match.offset,
+    #             'errorLength': match.errorLength,
+    #             'sentence': match.sentence}
+    #            for match in matches]
 
     terminal = (subprocess.check_output(f'python -u ./using_language_tool.py \
                                         /resume/{args.get("file")}',
@@ -27,8 +27,8 @@ def check():
 
     return jsonify(
         {
-            'grammar': f'{grammar}',
-            'text': f'{text}',
+            # 'grammar': f'{grammar}',
+            # 'text': f'{text}',
             'terminal': f'{terminal}'
         })
 
