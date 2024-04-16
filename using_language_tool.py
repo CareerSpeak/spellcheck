@@ -6,7 +6,8 @@ from pdf_parser import PdfParser
 
 class GrammarChecker:
     def __init__(self, language: str = 'en-US') -> None:
-        self.tool = language_tool_python.LanguageTool(language)
+        self.tool = language_tool_python.LanguageTool(
+            language, config={'cacheSize': 1000, 'pipelineCaching': True})
         self.errors_by_section = {}
         self.section_headers = ['summary', 'objective',
                                 'experience', 'skills', 'personal information']
